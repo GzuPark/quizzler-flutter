@@ -33,6 +33,8 @@ class _QuizPageState extends State<QuizPage> {
     'A slug\'s blood is green.',
   ];
 
+  List<bool> answers = [false, true, true];
+
   int questionNumber = 0;
 
   @override
@@ -79,6 +81,7 @@ class _QuizPageState extends State<QuizPage> {
                       color: Colors.green,
                     ),
                   );
+                  questionNumber++;
                 });
               },
             ),
@@ -106,6 +109,7 @@ class _QuizPageState extends State<QuizPage> {
                       color: Colors.red,
                     ),
                   );
+                  questionNumber++;
                 });
               },
             ),
@@ -117,9 +121,3 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
-
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
