@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  rflutter_alert:
+    git: git://github.com/RatelHub/rflutter_alert.git
 
 dev_dependencies:
   flutter_test:
