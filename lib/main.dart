@@ -55,6 +55,32 @@ class _QuizPageState extends State<QuizPage> {
     });
   }
 
+  /// Create TextButton to show True or False
+  Widget getAnswerButton({
+    required Color bgColor,
+    required String label,
+    required bool userPickedAnswer,
+  }) {
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.all(15.0),
+        child: TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: bgColor,
+          ),
+          child: Text(
+            label,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+            ),
+          ),
+          onPressed: () => checkAnswer(userPickedAnswer),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -77,41 +103,15 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.green,
-              ),
-              child: Text(
-                'True',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                ),
-              ),
-              onPressed: () => checkAnswer(true),
-            ),
-          ),
+        getAnswerButton(
+          bgColor: Colors.green,
+          label: 'True',
+          userPickedAnswer: true,
         ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.red,
-              ),
-              child: Text(
-                'False',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
-                ),
-              ),
-              onPressed: () => checkAnswer(false),
-            ),
-          ),
+        getAnswerButton(
+          bgColor: Colors.red,
+          label: 'False',
+          userPickedAnswer: false,
         ),
         Row(children: scoreKeeper),
         SizedBox(height: 30),
