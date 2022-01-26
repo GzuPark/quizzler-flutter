@@ -26,9 +26,22 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  QuestionBrain questionBrain = QuestionBrain();
   List<Icon> scoreKeeper = [];
 
-  QuestionBrain questionBrain = QuestionBrain();
+  void checkAnswer(bool userPickedAnswer) {
+    bool correctAnswer = questionBrain.getQuestionAnswer();
+
+    setState(() {
+      if (correctAnswer == userPickedAnswer) {
+        scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+      } else {
+        scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+      }
+
+      questionBrain.nextQuestion();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,25 +79,7 @@ class _QuizPageState extends State<QuizPage> {
                   fontSize: 20.0,
                 ),
               ),
-              onPressed: () {
-                bool correctAnswer = questionBrain.getQuestionAnswer();
-
-                if (correctAnswer == true) {
-                  print('Right');
-                } else {
-                  print('Wrong');
-                }
-
-                setState(() {
-                  questionBrain.nextQuestion();
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  );
-                });
-              },
+              onPressed: () => checkAnswer(true),
             ),
           ),
         ),
@@ -102,25 +97,7 @@ class _QuizPageState extends State<QuizPage> {
                   color: Colors.white,
                 ),
               ),
-              onPressed: () {
-                bool correctAnswer = questionBrain.getQuestionAnswer();
-
-                if (correctAnswer != true) {
-                  print('Right');
-                } else {
-                  print('Wrong');
-                }
-
-                setState(() {
-                  questionBrain.nextQuestion();
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                  );
-                });
-              },
+              onPressed: () => checkAnswer(false),
             ),
           ),
         ),
